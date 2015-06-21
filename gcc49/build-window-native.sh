@@ -1,4 +1,4 @@
-
+#! /usr/bin/env bash
 TOP_DIR=$(dirname $(readlink -f $0))
 
 SHOW_LOG_ON_ERROR=yes
