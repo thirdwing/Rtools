@@ -20,5 +20,6 @@ then
 else
     echo "--> Installing"
     make $MAKE_OPTS install > $LOG_DIR/mingw-w64-headers_install.log 2>&1 || exit 1
+    export CPPFLAGS="-I${BUILD_DIR}/mingw-w64/include ${CPPFLAGS}"
 fi
 touch install.marker
