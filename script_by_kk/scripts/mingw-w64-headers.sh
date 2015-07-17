@@ -6,8 +6,7 @@ then
     echo "--> Already configured"
 else
     echo "--> Configuring"
-    sh $MINGW_W64_SRC/mingw-w64-headers/configure --host=$TARGET --build=$BUILD --target=$TARGET \
-                                                  --with-sysroot=$PREFIX --prefix=$PREFIX \
+    sh $MINGW_W64_SRC/mingw-w64-headers/configure --host=$TARGET --build=$BUILD --target=$TARGET --prefix=$PREFIX \
                                                   $CRT_MULTILIB \
                                                   --enable-sdk=all --enable-secure-api \
                                                   > $LOG_DIR/mingw-w64_configure.log 2>&1 || exit 1

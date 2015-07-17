@@ -33,12 +33,12 @@ else
     tar jxf binutils-${BINUTILS_VERSION}.tar.bz2
 fi
 
-if [ -f $SRC_DIR/gmp-${GMP_VERSION}a.tar.bz2 ]
+if [ -f $SRC_DIR/gmp-${GMP_VERSION}.tar.bz2 ]
 then
     echo "--> Already downloaded gmp"
 else
     echo "--> Download gmp from ftp://ftp.nluug.nl/mirror/gnu"
-    wget ${GNU_URL}/gmp/gmp-${GMP_VERSION}a.tar.bz2 -P $SRC_DIR/
+    wget ${GNU_URL}/gmp/gmp-${GMP_VERSION}.tar.bz2 -P $SRC_DIR/
     cd $SRC_DIR
     tar jxf gmp-${GMP_VERSION}.tar.bz2
 fi
@@ -51,4 +51,14 @@ else
     wget ${GNU_URL}/mpfr/mpfr-${MPFR_VERSION}.tar.bz2 -P $SRC_DIR/
     cd $SRC_DIR
     tar jxf mpfr-${MPFR_VERSION}.tar.bz2
+fi
+
+if [ -f $SRC_DIR/mpc-${MPC_VERSION}.tar.gz ]
+then
+    echo "--> Already downloaded mpc"
+else
+    echo "--> Download mpc from ftp://gcc.gnu.org/pub/gcc/infrastructure"
+    wget ftp://gcc.gnu.org/pub/gcc/infrastructure/mpc-${MPC_VERSION}.tar.gz -P $SRC_DIR/
+    cd $SRC_DIR
+    tar zxvf mpc-${MPC_VERSION}.tar.gz
 fi
