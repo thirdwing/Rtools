@@ -12,6 +12,7 @@ else
                               --disable-multilib \
                               --enable-languages=$GCC_LANGUAGES --enable-libgomp \
                               --enable-sjlj-exceptions --enable-fully-dynamic-string \
+                              --enable-threads=posix --disable-multilib \
                               --disable-nls --disable-werror --enable-checking=release \
                               $GNU_WIN32_OPTIONS \
                               CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS" \
