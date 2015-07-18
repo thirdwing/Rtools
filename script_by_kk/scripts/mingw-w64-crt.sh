@@ -6,6 +6,7 @@ then
     echo "--> Already configured"
 else
     echo "--> Configuring"
+    export CPPFLAGS="-I${BUILD_DIR}/mingw64/include ${CPPFLAGS}"
     sh $MINGW_W64_SRC/mingw-w64-crt/configure --host=$TARGET --build=$BUILD --target=$TARGET --prefix=$PREFIX \
                                               $CRT_MULTILIB \
                                               --enable-wildcard \

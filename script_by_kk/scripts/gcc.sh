@@ -15,7 +15,8 @@ else
                               --enable-threads=posix \
                               --disable-nls --disable-werror --enable-checking=release \
                               $GNU_WIN32_OPTIONS \
-                              CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS" \
+                              CFLAGS="-I${BUILD_DIR}/mingw64/include $HOST_CFLAGS" \
+                              LDFLAGS="$HOST_LDFLAGS" \
                               > $LOG_DIR/gcc_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi

@@ -34,8 +34,6 @@ cd $BUILD_DIR/gcc
 . $SCRIPTS/gcc-c.sh || exit 1
 # build mingw-w64 crt
 echo "-> MinGW-w64 CRT"
-cd $BUILD_DIR/mingw-w64-headers
-. $SCRIPTS/mingw-w64-headers.sh || exit 1
 cd $BUILD_DIR/mingw-w64-crt
 . $SCRIPTS/mingw-w64-crt.sh || exit 1
 # build winpthreads
