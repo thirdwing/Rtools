@@ -27,10 +27,7 @@ then
     echo "--> Already built"
 else
     echo "--> Building"
-    #libada and libgomp need libgcc installed first to work
     make $MAKE_OPTS all-gcc > $LOG_DIR/gcc_build.log 2>&1 || exit 1
-    ##make $MAKE_OPTS install-target-libgcc > $LOG_DIR/gcc-libgcc_install.log 2>&1 || exit 1
-    ##make $MAKE_OPTS > $LOG_DIR/gcc_build.log 2>&1 || exit 1
 fi
 touch build.marker
 
