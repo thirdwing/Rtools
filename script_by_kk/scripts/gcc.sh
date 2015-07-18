@@ -12,7 +12,7 @@ else
                               --enable-targets=all \
                               --enable-languages=$GCC_LANGUAGES --enable-libgomp \
                               --enable-sjlj-exceptions --enable-fully-dynamic-string \
-                              --enable-threads=posix \
+                              --enable-threads=posix --disable-multilib \
                               --disable-nls --disable-werror --enable-checking=release \
                               $GNU_WIN32_OPTIONS \
                               CFLAGS="-I${BUILD_DIR}/mingw64/include $HOST_CFLAGS" \
@@ -28,9 +28,9 @@ then
 else
     echo "--> Building"
     #libada and libgomp need libgcc installed first to work
-    make $MAKE_OPTS all-target-libgcc > $LOG_DIR/gcc-libgcc_build.log 2>&1 || exit 1
-    make $MAKE_OPTS install-target-libgcc > $LOG_DIR/gcc-libgcc_install.log 2>&1 || exit 1
-    make $MAKE_OPTS > $LOG_DIR/gcc_build.log 2>&1 || exit 1
+    make $MAKE_OPTS all-gcc > $LOG_DIR/gcc_build.log 2>&1 || exit 1
+    ##make $MAKE_OPTS install-target-libgcc > $LOG_DIR/gcc-libgcc_install.log 2>&1 || exit 1
+    ##make $MAKE_OPTS > $LOG_DIR/gcc_build.log 2>&1 || exit 1
 fi
 touch build.marker
 
@@ -39,6 +39,6 @@ then
     echo "--> Already installed"
 else
     echo "--> Installing"
-    make $MAKE_OPTS install-strip > $LOG_DIR/gcc_install.log 2>&1 || exit 1
+    make $MAKE_OPTS install-strip-gcc > $LOG_DIR/gcc_install.log 2>&1 || exit 1
 fi
 touch install.marker
