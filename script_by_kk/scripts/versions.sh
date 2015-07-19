@@ -6,7 +6,7 @@ set -e
 # every version of gcc has specific version of dependecies
 export EXPAT_VERSION="2.1.0"
 export LIBICONV_VERSION="1.14"
-export GMP_VERSION="4.3.2"
+export GMP_VERSION="5.0.5"
 export MPFR_VERSION="2.4.2"
 export MPC_VERSION="0.8.1"
 export BINUTILS_VERSION="2.25"

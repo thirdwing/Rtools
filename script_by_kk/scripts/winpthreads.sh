@@ -34,7 +34,7 @@ else
     # mimic GCC runtime library behavior
     if [ "$HOST" == "x86_64-w64-mingw32" ] || [ "$HOST" == "i686-w64-mingw32" ]
     then
-        mv $BUILD_DIR/winpthreads/libpthread.a $PREFIX/bin/lib/libpthread.a
+        mv $BUILD_DIR/winpthreads/libpthread.a $PREFIX/lib/libpthread.a
     else
         mv $BUILD_DIR/winpthreads/libpthread.a $PREFIX/$TARGET/lib/libpthread.a
     fi
