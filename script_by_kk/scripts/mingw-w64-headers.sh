@@ -21,4 +21,8 @@ else
     echo "--> Installing"
     make $MAKE_OPTS install > $LOG_DIR/mingw-w64-headers_install.log 2>&1 || exit 1
 fi
+if [ "$HOST" == "x86_64-w64-mingw32" ] || [ "$HOST" == "i686-w64-mingw32" ]
+then
+    mv $BUILD_DIR/mingw64/include/float.h $BUILD_DIR/mingw64/include/float.h.bak 
+fi
 touch install.marker

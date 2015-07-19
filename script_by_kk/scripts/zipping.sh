@@ -40,7 +40,7 @@ then
 else
     echo "--> Zipping sources"
     cd $TOP_DIR
-    tar  -Jcf $SRC_FILE --exclude='*.git' --exclude='*.svn' src scripts patches *.sh
+    tar  -Jcf $SRC_FILE --exclude='*.git' --exclude='*.svn' src scripts *.sh
 fi
 
 cd $TOP_DIR
