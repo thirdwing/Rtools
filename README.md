@@ -2,7 +2,24 @@
 
 ## Goal
 
-Generate a new toolchain using a modern version of the gcc compiler that is capable of building R, as well as all pre-existing R packages and other required libraries. It should be possible to re-generate the toolchain from source, preferably with a single command line invocation that downloads and builds all required components on the fly.
+Generate a new toolchain using a modern version of the gcc compiler that is
+capable of building R, as well as all pre-existing R packages and other
+required libraries. It should be possible to re-generate the toolchain from
+source, preferably with a single command line invocation that downloads and
+builds all required components on the fly.
+
+## Building the Toolchains
+
+Assuming that you're running on a 64bit Linux that uses the `apt-get` package
+manager, just run:
+
+    ./install-dependencies.sh
+    ./script_by_rubenvb/buildall.sh
+
+This will produce MinGW compiler suites (both native and cross) that can then
+be used to build R. It should be possible to then take an Rtools 3.3
+installation, replace the pre-packages MinGW toolchains, and then use that to
+build R-devel.
 
 ## Task lists
 
