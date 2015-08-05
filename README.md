@@ -24,8 +24,8 @@ build R-devel.
 ## Task lists
 
 - [x] Scripts to build the new toolchain
-- [ ] Ensure that R’s own tests (make check) pass
-- [ ] Build and test ‘simple’ CRAN packages
+- [x] Ensure that R’s own tests pass (We are using a workaround on `R_pow()` to pass `make check`.)
+- [ ] Build and test ‘simple’ CRAN packages without `C/C++/Fortran`
 - [ ] Rebuild external libraries for R on Windows
 - [ ] Attempt to build a couple ‘key’ packages that depend on external libraries
 - [ ] Build and test BioConductor packages
