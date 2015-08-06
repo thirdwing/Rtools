@@ -10,6 +10,8 @@ builds all required components on the fly.
 
 ## Building the Toolchains
 
+There are two branches in the repo for different threading model, master for win32 and `posix` for posix.
+
 Assuming that you're running on a 64bit Linux that uses the `apt-get` package
 manager, just run:
 
