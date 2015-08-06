@@ -18,10 +18,10 @@ then
   echo "--> Already built"
 else
   echo "--> Building"
-  if [ "$HOST_OS" = "gnu" ]
-  then
-    cp $PREFIX/$TARGET/lib/libuser32.a $PREFIX/$TARGET/lib/libpthread.a
-  fi
+  #if [ "$HOST_OS" = "gnu" ]
+  #then
+  #  cp $PREFIX/$TARGET/lib/libuser32.a $PREFIX/$TARGET/lib/libpthread.a
+  #fi
   make $MAKE_OPTS > $LOG_DIR/winpthreads_build.log 2>&1 || exit 1
 fi
 touch build.marker
