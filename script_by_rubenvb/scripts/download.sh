@@ -136,8 +136,93 @@ else
     ln -sf make-${MAKE_VERSION} make
 fi
 
-## wget http://iweb.dl.sourceforge.net/project/libpng/zlib/${ZLIB_VERSION}/zlib-${ZLIB_VERSION}.tar.gz -P $SRC_DIR
+if [ -f $SRC_DIR/bzip2-${BZIP2_VERSION}.tar.gz ]
+then
+    echo "--> Already downloaded bzip2"
+else
+    echo "--> Download bzip2"
+    wget http://www.bzip.org/${BZIP2_VERSION}/bzip2-${BZIP2_VERSION}.tar.gz -P $SRC_DIR
+    cd $SRC_DIR
+    tar xzf bzip2-${BZIP2_VERSION}.tar.gz
+    ln -sf bzip2-${BZIP2_VERSION} bzip2
+fi
 
+if [ -f $SRC_DIR/gdal-${GDAL_VERSION}.tar.gz ]
+then
+    echo "--> Already downloaded gdal"
+else
+    echo "--> Download gdal"
+    wget http://download.osgeo.org/gdal/${GDAL_VERSION}/gdal-${GDAL_VERSION}.tar.gz -P $SRC_DIR
+    cd $SRC_DIR
+    tar xzf gdal-${GDAL_VERSION}.tar.gz
+    ln -sf gdal-${GDAL_VERSION} gdal
+fi
+
+if [ -f $SRC_DIR/libpng-${PNG_VERSION}.tar.gz ]
+then
+    echo "--> Already downloaded libpng"
+else
+    echo "--> Download libpng"
+    wget http://iweb.dl.sourceforge.net/project/libpng/libpng16/older-releases/${PNG_VERSION}/libpng-${PNG_VERSION}.tar.gz -P $SRC_DIR
+    cd $SRC_DIR
+    tar xzf libpng-${PNG_VERSION}.tar.gz
+    ln -sf libpng-${PNG_VERSION} libpng
+fi
+
+if [ -f $SRC_DIR/libxml2-${XML2_VERSION}.tar.gz ]
+then
+    echo "--> Already downloaded libxml2"
+else
+    echo "--> Download libxml2"
+    wget ftp://xmlsoft.org/libxml2/libxml2-${XML2_VERSION}.tar.gz -P $SRC_DIR
+    cd $SRC_DIR
+    tar xzf libxml2-${XML2_VERSION}.tar.gz
+    ln -sf libxml2-${XML2_VERSION} libxml2
+fi
+
+if [ -f $SRC_DIR/netcdf-${NETCDF_VERSION}.tar.gz ]
+then
+    echo "--> Already downloaded netcdf"
+else
+    echo "--> Download netcdf"
+    wget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-${NETCDF_VERSION}.tar.gz -P $SRC_DIR
+    cd $SRC_DIR
+    tar xzf netcdf-${NETCDF_VERSION}.tar.gz
+    ln -sf netcdf-${NETCDF_VERSION} netcdf
+fi
+
+if [ -f $SRC_DIR/pcre-${PCRE_VERSION}.tar.gz ]
+then
+    echo "--> Already downloaded pcre"
+else
+    echo "--> Download pcre"
+    wget http://iweb.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.gz -P $SRC_DIR
+    cd $SRC_DIR
+    tar xzf pcre-${PCRE_VERSION}.tar.gz
+    ln -sf pcre-${PCRE_VERSION} pcre
+fi
+
+if [ -f $SRC_DIR/proj-${PROJ_VERSION}.tar.gz ]
+then
+    echo "--> Already downloaded proj"
+else
+    echo "--> Download proj"
+    wget http://download.osgeo.org/proj/proj-${PROJ_VERSION}.tar.gz -P $SRC_DIR
+    cd $SRC_DIR
+    tar xzf proj-${PROJ_VERSION}.tar.gz
+    ln -sf proj-${PROJ_VERSION} proj
+fi
+
+if [ -f $SRC_DIR/tiff-${TIFF_VERSION}.tar.gz ]
+then
+    echo "--> Already downloaded tiff"
+else
+    echo "--> Download tiff"
+    wget http://download.osgeo.org/libtiff/tiff-${TIFF_VERSION}.tar.gz -P $SRC_DIR
+    cd $SRC_DIR
+    tar xzf tiff-${TIFF_VERSION}.tar.gz
+    ln -sf tiff-${TIFF_VERSION} tiff
+fi
 
 if [ -f $SRC_DIR/zlib-${ZLIB_VERSION}.tar.gz ]
 then
@@ -149,3 +234,4 @@ else
     tar xzf zlib-${ZLIB_VERSION}.tar.gz
     ln -sf zlib-${ZLIB_VERSION} zlib
 fi
+
