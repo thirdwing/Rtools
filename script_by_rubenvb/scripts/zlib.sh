@@ -20,6 +20,7 @@ then
 else
   echo "--> Building"
   make $MAKE_OPTS > $LOG_DIR/zlib_build.log 2>&1 || exit 1
+  echo "--> Built"
 fi
 touch $LOG_DIR/zlib_build.marker
 
@@ -29,6 +30,7 @@ then
 else
   echo "--> Installing"
   make $MAKE_OPTS install > $LOG_DIR/zlib_install.log 2>&1 || exit 1
+  echo "--> installed"
 fi
 touch $LOG_DIR/zlib_install.marker
 

@@ -10,7 +10,7 @@ else
   echo "--> Configuring"
   ./configure --host=$HOST --enable-static --disable-shared \
   --prefix=$BUILD_DIR CFLAGS=-O2 CXXFLAGS=-O2 --without-curl \
-  --with-expat=$PREREQ_INSTALL --without-sqlite3 --with-odbc --without-geos \
+  --with-expat=$BUILD_DIR --without-sqlite3 --with-odbc --without-geos \
   --with-static-proj4 > $LOG_DIR/gdal_configure.log 2>&1 || exit 1
   echo "--> Configured"
 fi
@@ -22,6 +22,7 @@ then
 else
   echo "--> Building"
   make $MAKE_OPTS > $LOG_DIR/gdal_build.log 2>&1 || exit 1
+  echo "--> Built"
 fi
 touch $LOG_DIR/gdal_build.marker
 
@@ -31,6 +32,7 @@ then
 else
   echo "--> Installing"
   make $MAKE_OPTS install > $LOG_DIR/gdal_install.log 2>&1 || exit 1
+  echo "--> Installed"
 fi
 touch $LOG_DIR/gdal_install.marker
 

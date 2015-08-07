@@ -42,14 +42,14 @@ mkdir -p $LOG_DIR
 
 . ./build_r_extsoft.sh || exit 1
 
-export PATH=$PWD/linux64mingw32/mingw32/bin:$PATH
+#export PATH=$PWD/linux64mingw32/mingw32/bin:$PATH
 
-echo "32-bit libraries"
+#echo "32-bit libraries"
 
-export HOST="i686-w64-mingw32"
-export CROSS="i686-w64-mingw32-"
-export BUILD_DIR=$WINLIB32
-export LOG_DIR=$BUILD_DIR/logs
-mkdir -p $LOG_DIR
+#export HOST="i686-w64-mingw32"
+#export CROSS="i686-w64-mingw32-"
+#export BUILD_DIR=$WINLIB32
+#export LOG_DIR=$BUILD_DIR/logs
+#mkdir -p $LOG_DIR
 
-. ./build_r_extsoft.sh || exit 1
+#. ./build_r_extsoft.sh || exit 1
