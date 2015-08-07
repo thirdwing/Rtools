@@ -3,4 +3,7 @@ packages/
 prereq/
 linux64mingw32/
 linux64mingw64/
-
+mingw64mingw64/
+mingw64mingw32/
+mingw32mingw64/
+mingw32mingw32/

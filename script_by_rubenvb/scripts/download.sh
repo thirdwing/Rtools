@@ -8,7 +8,7 @@ then
     echo "--> Already downloaded mingw-w64"
 else
     echo "--> Download mingw-w64"
-    wget http://ufpr.dl.sourceforge.net/project/mingw-w64/mingw-w64/mingw-w64-release/${MINGW_W64_VERSION}.tar.bz2 -P $SRC_DIR
+    wget http://iweb.dl.sourceforge.net/project/mingw-w64/mingw-w64/mingw-w64-release/${MINGW_W64_VERSION}.tar.bz2 -P $SRC_DIR
     cd $SRC_DIR
     tar jxf ${MINGW_W64_VERSION}.tar.bz2
     ln -sf ${MINGW_W64_VERSION} mingw-w64
