@@ -8,7 +8,7 @@ then
   echo "--> Already configured"
 else
   echo "--> Configuring"
-  env CROSS_PREFIX=x86_64-w64-mingw32- ./configure --static -prefix=$BUILD_DIR \
+  env CROSS_PREFIX=$CROSS ./configure --static -prefix=$BUILD_DIR \
                                        > $LOG_DIR/zlib_configure.log 2>&1 || exit 1
   echo "--> Configured"
 fi
@@ -31,3 +31,5 @@ else
   make $MAKE_OPTS install > $LOG_DIR/zlib_install.log 2>&1 || exit 1
 fi
 touch $LOG_DIR/zlib_install.marker
+
+cd $TOP_DIR
