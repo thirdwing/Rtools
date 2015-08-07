@@ -23,14 +23,11 @@ export SCRIPTS=$TOP_DIR/scripts
 
 export PREFIX=$BUILD_DIR/$SHORT_NAME
 
-export WINLIB64=$TOP_DIR/W64soft
-
-export WINLIB32=$TOP_DIR/W32soft
 
 DIRS_TO_MAKE="$BUILD_DIR $LOG_DIR
               $PREFIX $PREFIX/mingw $PREFIX/mingw/include $PREFIX/$TARGET/include $PREFIX/$TARGET/lib
               $PREREQ_INSTALL $PREREQ_INSTALL/lib $PREREQ_INSTALL/include
-              $PACKAGE_DIR $PACKAGE_DIR/$HOST $WIN_LIB64 $WIN_LIB32"
+              $PACKAGE_DIR $PACKAGE_DIR/$HOST"
 mkdir -p $DIRS_TO_MAKE
 
 # if [ "$TARGET_ARCH" = "i686" ]

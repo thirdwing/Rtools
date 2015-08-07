@@ -27,8 +27,10 @@ sh ./buildmingw64mingw32.sh || exit 1
 ##sh ./buildmingw32mingw32-dw2.sh || exit 1
 
 export PATH=$PWD/linux64mingw64/mingw64/bin:$OLD_PATH
+export SRC_DIR=$PWD/src
 
-. ./scripts/directories.sh || exit 1
+export WINLIB64=$PWD/W64soft
+export WINLIB32=$PWD/W32soft
 
 echo "64-bit libraries"
 
