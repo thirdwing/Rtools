@@ -32,4 +32,4 @@ else
 fi
 touch $LOG_DIR/zlib_install.marker
 
-cd $TOP_DIR
+cd ../..
