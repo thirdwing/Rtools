@@ -135,3 +135,17 @@ else
     tar xzf make-${MAKE_VERSION}.tar.gz
     ln -sf make-${MAKE_VERSION} make
 fi
+
+## wget http://iweb.dl.sourceforge.net/project/libpng/zlib/${ZLIB_VERSION}/zlib-${ZLIB_VERSION}.tar.gz -P $SRC_DIR
+
+
+if [ -f $SRC_DIR/zlib-${ZLIB_VERSION}.tar.gz ]
+then
+    echo "--> Already downloaded zlib"
+else
+    echo "--> Download zlib from sourceforge"
+    wget http://iweb.dl.sourceforge.net/project/libpng/zlib/${ZLIB_VERSION}/zlib-${ZLIB_VERSION}.tar.gz -P $SRC_DIR
+    cd $SRC_DIR
+    tar xzf zlib-${ZLIB_VERSION}.tar.gz
+    ln -sf zlib-${ZLIB_VERSION} zlib
+fi
