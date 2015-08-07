@@ -7,3 +7,5 @@ echo "-> zlib"
 echo "-> bzip2"
 . ./scripts/bzip2.sh || exit 1
 
+echo "-> gdal"
+. ./scripts/gdal.sh || exit 1
