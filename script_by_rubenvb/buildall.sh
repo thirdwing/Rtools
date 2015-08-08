@@ -45,6 +45,9 @@ mkdir -p $LOG_DIR
 mkdir -p local320 local320/include local320/lib/x64
 cp -rf W64soft/include/* ./local320/include
 cp -rf W64soft/lib/* ./local320/lib/x64
+rm -rf ./local320/lib/x64/*.la
+rm -rf ./local320/lib/x64/*.dll.a
+zip -r local320.zip local320
 
 #export PATH=$PWD/linux64mingw32/mingw32/bin:$PATH
 

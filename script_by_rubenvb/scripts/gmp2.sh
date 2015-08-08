@@ -22,6 +22,7 @@ then
 else
   echo "--> Building"
   make $MAKE_OPTS > $LOG_DIR/gmp_build.log 2>&1 || exit 1
+  echo "--> Built"
 fi
 touch $LOG_DIR/gmp_build.marker
 
@@ -31,6 +32,7 @@ then
 else
   echo "--> Installing"
   make $MAKE_OPTS install > $LOG_DIR/gmp_install.log 2>&1 || exit 1
+  echo "--> Installed"
 fi
 touch $LOG_DIR/gmp_install.marker
 
