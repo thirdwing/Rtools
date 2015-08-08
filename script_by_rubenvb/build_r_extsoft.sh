@@ -10,14 +10,20 @@ echo "-> bzip2"
 echo "-> expat"
 . ./scripts/expat2.sh || exit 1
 
+echo "-> gmp"
+. ./scripts/gmp2.sh || exit 1
+
 echo "-> gdal"
 . ./scripts/gdal.sh || exit 1
 
 echo "-> libpng"
 . ./scripts/libpng.sh || exit 1
 
+echo "-> libiconv"
+. ./scripts/libpng.sh || exit 1
+
 echo "-> libxml2"
-. ./scripts/libxml2.sh || exit 1
+. ./scripts/libiconv2.sh || exit 1
 
 echo "-> mpfr"
 . ./scripts/mpfr2.sh || exit 1

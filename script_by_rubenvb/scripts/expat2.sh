@@ -33,4 +33,4 @@ else
 fi
 touch $LOG_DIR/expat_install.marker
 
-cd ..
+cd ../..
