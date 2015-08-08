@@ -248,11 +248,24 @@ fi
 
 if [ -f $SRC_DIR/gsl-${GSL_VERSION}.tar.gz ]
 then
-    echo "--> Already downloaded xz"
+    echo "--> Already downloaded gsl"
 else
-    echo "--> Download xz"
-    wget http://ftp.gnu.org/gnu/gsl/gsl-1.16.tar.gz -P $SRC_DIR
+    echo "--> Download gsl"
+    wget http://ftp.gnu.org/gnu/gsl/gsl-${GSL_VERSION}.tar.gz -P $SRC_DIR
     cd $SRC_DIR
     tar xzf gsl-${GSL_VERSION}.tar.gz
     ln -sf gsl-${GSL_VERSION} gsl
+fi
+
+## http://www.ijg.org/files/jpegsrc.v9a.tar.gz
+
+if [ -f $SRC_DIR/jpegsrc.v${JPEG_VERSION}.tar.gz ]
+then
+    echo "--> Already downloaded jpeg"
+else
+    echo "--> Download jpeg"
+    wget http://www.ijg.org/files/jpegsrc.v${JPEG_VERSION}.tar.gz -P $SRC_DIR
+    cd $SRC_DIR
+    tar xzf jpegsrc.v${JPEG_VERSION}.tar.gz
+    ln -sf jpeg-${JPEG_VERSION} jpeg
 fi
