@@ -235,3 +235,24 @@ else
     ln -sf zlib-${ZLIB_VERSION} zlib
 fi
 
+if [ -f $SRC_DIR/xz-${XZ_VERSION}.tar.gz ]
+then
+    echo "--> Already downloaded xz"
+else
+    echo "--> Download xz"
+    wget http://tukaani.org/xz/xz-${XZ_VERSION}.tar.gz -P $SRC_DIR
+    cd $SRC_DIR
+    tar xzf xz-${XZ_VERSION}.tar.gz
+    ln -sf xz-${XZ_VERSION} xz
+fi
+
+if [ -f $SRC_DIR/gsl-${GSL_VERSION}.tar.gz ]
+then
+    echo "--> Already downloaded xz"
+else
+    echo "--> Download xz"
+    wget http://ftp.gnu.org/gnu/gsl/gsl-1.16.tar.gz -P $SRC_DIR
+    cd $SRC_DIR
+    tar xzf gsl-${GSL_VERSION}.tar.gz
+    ln -sf gsl-${GSL_VERSION} gsl
+fi

@@ -39,3 +39,6 @@ echo "-> proj"
 
 echo "-> tiff"
 . ./scripts/tiff.sh || exit 1
+
+echo "-> xz"
+. ./scripts/xz.sh || exit 1
