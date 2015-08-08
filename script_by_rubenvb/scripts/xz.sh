@@ -8,7 +8,8 @@ then
   echo "--> Already configured"
 else
   echo "--> Configuring"
-  ./configure --host=$HOST -prefix=$BUILD_DIR > $LOG_DIR/xz_configure.log 2>&1 || exit 1
+  ./configure --host=$HOST --prefix=$BUILD_DIR --enable-static --disable-shared \
+  CFLAGS=-O2  CXXFLAGS=-O2 > $LOG_DIR/xz_configure.log 2>&1 || exit 1
   echo "--> Configured"
 fi
 touch $LOG_DIR/xz_configure.marker
