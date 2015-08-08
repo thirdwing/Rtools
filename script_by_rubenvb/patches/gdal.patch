@@ -1,0 +1,58 @@
+diff -ru gdal-1.9.2/configure ../W64soft/build/gdal-1.9.2/configure
+--- gdal-1.9.2/configure	2012-10-09 01:58:28.000000000 +0100
++++ ../W64soft/build/gdal-1.9.2/configure	2012-12-02 11:21:08.542232168 +0000
+@@ -23870,7 +23870,7 @@
+   $as_echo_n "(cached) " >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-lodbc  $LIBS"
++LIBS="-lodbc32  $LIBS"
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
+@@ -23880,11 +23880,11 @@
+ #ifdef __cplusplus
+ extern "C"
+ #endif
+-char SQLConnect ();
++//char SQLConnect ();
+ int
+ main ()
+ {
+-return SQLConnect ();
++//return SQLConnect ();
+   ;
+   return 0;
+ }
+@@ -23912,7 +23912,7 @@
+   $as_echo_n "(cached) " >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-lodbcinst  $LIBS"
++LIBS="-lodbccp32  $LIBS"
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
+@@ -23922,11 +23922,11 @@
+ #ifdef __cplusplus
+ extern "C"
+ #endif
+-char SQLInstallDriverEx ();
++//char SQLInstallDriverEx ();
+ int
+ main ()
+ {
+-return SQLInstallDriverEx ();
++//return SQLInstallDriverEx ();
+   ;
+   return 0;
+ }
+@@ -23959,7 +23959,7 @@
+   fi
+ 
+   if test "$ODBC_SETTING" = "yes"  ; then
+-    LIBS="-lodbc -lodbcinst $LIBS"
++    LIBS="-lodbc32 -lodbccp32 $LIBS"
+   fi
+ 
+ else

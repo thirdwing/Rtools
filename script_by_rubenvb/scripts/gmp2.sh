@@ -33,3 +33,5 @@ else
   make $MAKE_OPTS install > $LOG_DIR/gmp_install.log 2>&1 || exit 1
 fi
 touch $LOG_DIR/gmp_install.marker
+
+cd ../..

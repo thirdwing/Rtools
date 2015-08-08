@@ -9,8 +9,8 @@ then
 else
   echo "--> Configuring"
   ./configure --host=$HOST --enable-static --disable-shared \
-  prefix=$BUILD_DIR CFLAGS=-O2 CXXFLAGS=-O2 --without-python \
-  --with-zlib=$BUILD_DIR --with-iconv=$BUILD_DIR > $LOG_DIR/libxml2_configure.log 2>&1 || exit 1
+  --prefix=$BUILD_DIR CFLAGS=-O2 CXXFLAGS=-O2 --without-python \
+  --with-zlib=$BUILD_DIR --with-iconv=$BUILD_DIR  > $LOG_DIR/libxml2_configure.log 2>&1 || exit 1
   echo "--> Configured"
 fi
 touch $LOG_DIR/libxml2_configure.marker
