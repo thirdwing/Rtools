@@ -42,6 +42,10 @@ mkdir -p $LOG_DIR
 
 . ./build_r_extsoft.sh || exit 1
 
+mkdir -p local320 local320/include local320/lib/x64
+cp -rf W64soft/include/* ./local320/include
+cp -rf W64soft/lib/* ./local320/lib/x64
+
 #export PATH=$PWD/linux64mingw32/mingw32/bin:$PATH
 
 #echo "32-bit libraries"
@@ -53,3 +57,4 @@ mkdir -p $LOG_DIR
 #mkdir -p $LOG_DIR
 
 #. ./build_r_extsoft.sh || exit 1
+#mkdir -p local320/lib/i386

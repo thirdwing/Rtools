@@ -10,7 +10,7 @@ else
   echo "--> Configuring"
   ./configure --host=$HOST --prefix=$BUILD_DIR \
               --disable-shared --enable-static \
-              CC=$HOST_CC-gcc CFLAGS=-O2 > $LOG_DIR/libiconv_configure.log 2>&1 || exit 1
+              CC=$HOST-gcc CFLAGS=-O2 > $LOG_DIR/libiconv_configure.log 2>&1 || exit 1
   echo "--> Configured"
 fi
 touch $LOG_DIR/libiconv_configure.marker
@@ -33,4 +33,4 @@ else
 fi
 touch $LOG_DIR/libiconv_install.marker
 
-cd ..
+cd ../..
