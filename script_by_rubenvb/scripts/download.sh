@@ -190,6 +190,7 @@ else
     cd $SRC_DIR
     tar xzf netcdf-${NETCDF_VERSION}.tar.gz
     ln -sf netcdf-${NETCDF_VERSION} netcdf
+    patch netcdf/libsrc/posixio.c ../patches/netcdf.patch
 fi
 
 if [ -f $SRC_DIR/pcre-${PCRE_VERSION}.tar.gz ]

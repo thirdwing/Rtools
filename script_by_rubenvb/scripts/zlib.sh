@@ -8,7 +8,7 @@ then
   echo "--> Already configured"
 else
   echo "--> Configuring"
-  env CROSS_PREFIX=$CROSS ./configure --static -prefix=$BUILD_DIR \
+  env CROSS_PREFIX=$HOST- ./configure --static -prefix=$BUILD_DIR \
                                        > $LOG_DIR/zlib_configure.log 2>&1 || exit 1
   echo "--> Configured"
 fi

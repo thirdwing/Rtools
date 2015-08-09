@@ -1,0 +1,379 @@
+--- a/netcdf/libsrc/posixio.c	2015-03-26 11:08:06.000000000 +0000
++++ b/netcdf/libsrc/posixio.c	2015-03-26 11:15:10.000000000 +0000
+@@ -15,8 +15,12 @@
+ #include <windows.h>
+ #include <winbase.h>
+ #include <io.h>
++# define OFF_T off64_t
++# define LSEEK _lseeki64
+ #else
+ #include <unistd.h>
++# define OFF_T off_t
++# define LSEEK lseek
+ #endif
+ 
+ #include <assert.h>
+@@ -83,8 +87,8 @@
+ #endif
+ 
+ /*Forward*/
+-static int ncio_px_filesize(ncio *nciop, off_t *filesizep);
+-static int ncio_px_pad_length(ncio *nciop, off_t length);
++static int ncio_px_filesize(ncio *nciop, OFF_T *filesizep);
++static int ncio_px_pad_length(ncio *nciop, OFF_T length);
+ static int ncio_px_close(ncio *nciop, int doUnlink);
+ static int ncio_spx_close(ncio *nciop, int doUnlink);
+ 
+@@ -153,7 +157,7 @@
+  * file shorter.
+  */
+ static int
+-fgrow(const int fd, const off_t len)
++fgrow(const int fd, const OFF_T len)
+ {
+ 	struct stat sb;
+ 	if (fstat(fd, &sb) < 0)
+@@ -164,14 +168,14 @@
+ 	    const long dumb = 0;
+ 	    /* we don't use ftruncate() due to problem with FAT32 file systems */
+ 	    /* cache current position */
+-	    const off_t pos = lseek(fd, 0, SEEK_CUR);
++	    const OFF_T pos = LSEEK(fd, 0, SEEK_CUR);
+ 	    if(pos < 0)
+ 		return errno;
+-	    if (lseek(fd, len-sizeof(dumb), SEEK_SET) < 0)
++	    if (LSEEK(fd, len-sizeof(dumb), SEEK_SET) < 0)
+ 		return errno;
+ 	    if(write(fd, &dumb, sizeof(dumb)) < 0)
+ 		return errno;
+-	    if (lseek(fd, pos, SEEK_SET) < 0)
++	    if (LSEEK(fd, pos, SEEK_SET) < 0)
+ 		return errno;
+ 	}
+ 	return ENOERR;
+@@ -184,7 +188,7 @@
+  * needed.
+  */
+ static int
+-fgrow2(const int fd, const off_t len)
++fgrow2(const int fd, const OFF_T len)
+ {
+ 	struct stat sb;
+ 	if (fstat(fd, &sb) < 0)
+@@ -195,14 +199,14 @@
+ 	    const char dumb = 0;
+ 	    /* we don't use ftruncate() due to problem with FAT32 file systems */
+ 	    /* cache current position */
+-	    const off_t pos = lseek(fd, 0, SEEK_CUR);
++	    const OFF_T pos = LSEEK(fd, 0, SEEK_CUR);
+ 	    if(pos < 0)
+ 		return errno;
+-	    if (lseek(fd, len-1, SEEK_SET) < 0)
++	    if (LSEEK(fd, len-1, SEEK_SET) < 0)
+ 		return errno;
+ 	    if(write(fd, &dumb, sizeof(dumb)) < 0)
+ 		return errno;
+-	    if (lseek(fd, pos, SEEK_SET) < 0)
++	    if (LSEEK(fd, pos, SEEK_SET) < 0)
+ 		return errno;
+ 	}
+ 	return ENOERR;
+@@ -224,8 +228,8 @@
+ */
+ static int
+ px_pgout(ncio *const nciop,
+-	off_t const offset,  const size_t extent,
+-	void *const vp, off_t *posp)
++	OFF_T const offset,  const size_t extent,
++	void *const vp, OFF_T *posp)
+ {
+     ssize_t partial;
+     size_t nextent;
+@@ -234,11 +238,11 @@
+ 	assert(offset % X_ALIGN == 0);
+ #endif
+ 
+-	assert(*posp == OFF_NONE || *posp == lseek(nciop->fd, 0, SEEK_CUR));
++	assert(*posp == OFF_NONE || *posp == LSEEK(nciop->fd, 0, SEEK_CUR));
+ 
+ 	if(*posp != offset)
+ 	{
+-		if(lseek(nciop->fd, offset, SEEK_SET) != offset)
++		if(LSEEK(nciop->fd, offset, SEEK_SET) != offset)
+ 		{
+ 			return errno;
+ 		}
+@@ -277,8 +281,8 @@
+ */
+ static int
+ px_pgin(ncio *const nciop,
+-	off_t const offset, const size_t extent,
+-	void *const vp, size_t *nreadp, off_t *posp)
++	OFF_T const offset, const size_t extent,
++	void *const vp, size_t *nreadp, OFF_T *posp)
+ {
+ 	int status;
+ 	ssize_t nread;
+@@ -290,7 +294,7 @@
+     /* *posp == OFF_NONE (-1) on first call. This
+        is problematic because lseek also returns -1
+        on error. Use errno instead. */
+-    if(*posp != OFF_NONE && *posp != lseek(nciop->fd, 0, SEEK_CUR)) {
++    if(*posp != OFF_NONE && *posp != LSEEK(nciop->fd, 0, SEEK_CUR)) {
+       if(errno) {
+         status = errno;
+         printf("Error %d: %s\n",errno,strerror(errno));
+@@ -300,7 +304,7 @@
+ 
+ 	if(*posp != offset)
+ 	{
+-		if(lseek(nciop->fd, offset, SEEK_SET) != offset)
++		if(LSEEK(nciop->fd, offset, SEEK_SET) != offset)
+ 		{
+ 			status = errno;
+ 			return status;
+@@ -341,9 +345,9 @@
+ */
+ typedef struct ncio_px {
+ 	size_t blksz;
+-	off_t pos;
++	OFF_T pos;
+ 	/* buffer */
+-	off_t	bf_offset;
++	OFF_T	bf_offset;
+ 	size_t	bf_extent;
+ 	size_t	bf_cnt;
+ 	void	*bf_base;
+@@ -370,10 +374,10 @@
+    rflags - only RGN_MODIFIED is relevent to this function, others ignored
+ */
+ static int
+-px_rel(ncio_px *const pxp, off_t offset, int rflags)
++px_rel(ncio_px *const pxp, OFF_T offset, int rflags)
+ {
+ 	assert(pxp->bf_offset <= offset
+-		 && offset < pxp->bf_offset + (off_t) pxp->bf_extent);
++		 && offset < pxp->bf_offset + (OFF_T) pxp->bf_extent);
+ 	assert(pIf(fIsSet(rflags, RGN_MODIFIED),
+ 		fIsSet(pxp->bf_rflags, RGN_WRITE)));
+ 
+@@ -403,7 +407,7 @@
+    rflags - only RGN_MODIFIED is relevent to this function, others ignored
+ */
+ static int
+-ncio_px_rel(ncio *const nciop, off_t offset, int rflags)
++ncio_px_rel(ncio *const nciop, OFF_T offset, int rflags)
+ {
+ 	ncio_px *const pxp = (ncio_px *)nciop->pvt;
+ 
+@@ -450,15 +454,15 @@
+ */
+ static int
+ px_get(ncio *const nciop, ncio_px *const pxp,
+-		off_t offset, size_t extent,
++		OFF_T offset, size_t extent,
+ 		int rflags,
+ 		void **const vpp)
+ {
+ 	int status = ENOERR;
+ 
+-	const off_t blkoffset = _RNDDOWN(offset, (off_t)pxp->blksz);
+-	off_t diff = (size_t)(offset - blkoffset);
+-	off_t blkextent = _RNDUP(diff + extent, pxp->blksz);
++	const OFF_T blkoffset = _RNDDOWN(offset, (OFF_T)pxp->blksz);
++	OFF_T diff = (size_t)(offset - blkoffset);
++	OFF_T blkextent = _RNDUP(diff + extent, pxp->blksz);
+ 
+ 	assert(extent != 0);
+ 	assert(extent < X_INT_MAX); /* sanity check */
+@@ -492,7 +496,7 @@
+ 			 	(void *)((char *)pxp->bf_base + pxp->blksz);
+ 			assert(pxp->bf_extent == pxp->blksz);
+ 			status = px_pgin(nciop,
+-				 pxp->bf_offset + (off_t)pxp->blksz,
++				 pxp->bf_offset + (OFF_T)pxp->blksz,
+ 				 pxp->blksz,
+ 				 middle,
+ 				 &pxp->bf_cnt,
+@@ -507,7 +511,7 @@
+ 	/* else */
+ 
+ 	if(pxp->bf_extent > pxp->blksz
+-		 && blkoffset == pxp->bf_offset + (off_t)pxp->blksz)
++		 && blkoffset == pxp->bf_offset + (OFF_T)pxp->blksz)
+ 	{
+ 		/* hit in upper half */
+ 		if(blkextent == pxp->blksz)
+@@ -564,7 +568,7 @@
+ 			void *const middle =
+ 			 	(void *)((char *)pxp->bf_base + pxp->blksz);
+ 			status = px_pgin(nciop,
+-				 pxp->bf_offset + (off_t)pxp->blksz,
++				 pxp->bf_offset + (OFF_T)pxp->blksz,
+ 				 pxp->blksz,
+ 				 middle,
+ 				 &pxp->bf_cnt,
+@@ -578,7 +582,7 @@
+ 	}
+ 	/* else */
+ 
+-	if(blkoffset == pxp->bf_offset - (off_t)pxp->blksz)
++	if(blkoffset == pxp->bf_offset - (OFF_T)pxp->blksz)
+ 	{
+ 		/* wants the page below */
+ 		void *const middle =
+@@ -593,7 +597,7 @@
+ 				/* page out upper half */
+ 				assert(pxp->bf_refcount <= 0);
+ 				status = px_pgout(nciop,
+-					pxp->bf_offset + (off_t)pxp->blksz,
++					pxp->bf_offset + (OFF_T)pxp->blksz,
+ 					pxp->bf_cnt - pxp->blksz,
+ 					middle,
+ 					&pxp->pos);
+@@ -693,7 +697,7 @@
+ */
+ static int
+ ncio_px_get(ncio *const nciop,
+-		off_t offset, size_t extent,
++		OFF_T offset, size_t extent,
+ 		int rflags,
+ 		void **const vpp)
+ {
+@@ -721,7 +725,7 @@
+ 
+ /* ARGSUSED */
+ static int
+-px_double_buffer(ncio *const nciop, off_t to, off_t from,
++px_double_buffer(ncio *const nciop, OFF_T to, OFF_T from,
+ 			size_t nbytes, int rflags)
+ {
+ 	ncio_px *const pxp = (ncio_px *)nciop->pvt;
+@@ -793,13 +797,13 @@
+    reasonable flag value is RGN_NOLOCK.
+ */
+ static int
+-ncio_px_move(ncio *const nciop, off_t to, off_t from,
++ncio_px_move(ncio *const nciop, OFF_T to, OFF_T from,
+ 			size_t nbytes, int rflags)
+ {
+ 	ncio_px *const pxp = (ncio_px *)nciop->pvt;
+ 	int status = ENOERR;
+-	off_t lower;
+-	off_t upper;
++	OFF_T lower;
++	OFF_T upper;
+ 	char *base;
+ 	size_t diff;
+ 	size_t extent;
+@@ -837,8 +841,8 @@
+ 
+ if(to > from)
+ {
+-		off_t frm = from + nbytes;
+-		off_t toh = to + nbytes;
++		OFF_T frm = from + nbytes;
++		OFF_T toh = to + nbytes;
+ 		for(;;)
+ 		{
+ 			size_t loopextent = MIN(remaining, pxp->blksz);
+@@ -1044,9 +1048,9 @@
+    flag is used.
+ */
+ typedef struct ncio_spx {
+-	off_t pos;
++	OFF_T pos;
+ 	/* buffer */
+-	off_t	bf_offset;
++	OFF_T	bf_offset;
+ 	size_t	bf_extent;
+ 	size_t	bf_cnt;
+ 	void	*bf_base;
+@@ -1071,7 +1075,7 @@
+ 
+ */
+ static int
+-ncio_spx_rel(ncio *const nciop, off_t offset, int rflags)
++ncio_spx_rel(ncio *const nciop, OFF_T offset, int rflags)
+ {
+ 	ncio_spx *const pxp = (ncio_spx *)nciop->pvt;
+ 	int status = ENOERR;
+@@ -1118,7 +1122,7 @@
+ */
+ static int
+ ncio_spx_get(ncio *const nciop,
+-		off_t offset, size_t extent,
++		OFF_T offset, size_t extent,
+ 		int rflags,
+ 		void **const vpp)
+ {
+@@ -1193,7 +1197,7 @@
+ #if 0
+ /*ARGSUSED*/
+ static int
+-strategy(ncio *const nciop, off_t to, off_t offset,
++strategy(ncio *const nciop, OFF_T to, OFF_T offset,
+ 			size_t extent, int rflags)
+ {
+ 	static ncio_spx pxp[1];
+@@ -1277,12 +1281,12 @@
+    rflags - One of the RGN_* flags defined in ncio.h.
+ */
+ static int
+-ncio_spx_move(ncio *const nciop, off_t to, off_t from,
++ncio_spx_move(ncio *const nciop, OFF_T to, OFF_T from,
+ 			size_t nbytes, int rflags)
+ {
+ 	int status = ENOERR;
+-	off_t lower = from;
+-	off_t upper = to;
++	OFF_T lower = from;
++	OFF_T upper = to;
+ 	char *base;
+ 	size_t diff;
+ 	size_t extent;
+@@ -1515,7 +1519,7 @@
+ int
+ posixio_create(const char *path, int ioflags,
+ 	size_t initialsz,
+-	off_t igeto, size_t igetsz, size_t *sizehintp,
++	OFF_T igeto, size_t igetsz, size_t *sizehintp,
+ 	ncio **nciopp, void **const igetvpp)
+ {
+ 	ncio *nciop;
+@@ -1584,7 +1588,7 @@
+ 
+ 	if(initialsz != 0)
+ 	{
+-		status = fgrow(fd, (off_t)initialsz);
++		status = fgrow(fd, (OFF_T)initialsz);
+ 		if(status != ENOERR)
+ 			goto unwind_open;
+ 	}
+@@ -1658,7 +1662,7 @@
+ int
+ posixio_open(const char *path,
+ 	int ioflags,
+-	off_t igeto, size_t igetsz, size_t *sizehintp,
++	OFF_T igeto, size_t igetsz, size_t *sizehintp,
+ 	ncio **nciopp, void **const igetvpp)
+ {
+ 	ncio *nciop;
+@@ -1738,7 +1742,7 @@
+  * Get file size in bytes.
+  */
+ static int
+-ncio_px_filesize(ncio *nciop, off_t *filesizep)
++ncio_px_filesize(ncio *nciop, OFF_T *filesizep)
+ {
+ 
+ 
+@@ -1772,7 +1776,7 @@
+  * written in NOFILL mode.
+  */
+ static int
+-ncio_px_pad_length(ncio *nciop, off_t length)
++ncio_px_pad_length(ncio *nciop, OFF_T length)
+ {
+ 
+ 	int status = ENOERR;
