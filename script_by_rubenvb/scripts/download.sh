@@ -259,8 +259,6 @@ else
     ln -sf gsl-${GSL_VERSION} gsl
 fi
 
-## http://www.ijg.org/files/jpegsrc.v9a.tar.gz
-
 if [ -f $SRC_DIR/jpegsrc.v${JPEG_VERSION}.tar.gz ]
 then
     echo "--> Already downloaded jpeg"
@@ -270,4 +268,18 @@ else
     cd $SRC_DIR
     tar xzf jpegsrc.v${JPEG_VERSION}.tar.gz
     ln -sf jpeg-${JPEG_VERSION} jpeg
+fi
+
+if [ -f $SRC_DIR/tcl${TCLTK_VERSION}-src.tar.gz ]
+then
+    echo "--> Already downloaded tcltk"
+else
+    echo "--> Download tcltk"
+    wget http://iweb.dl.sourceforge.net/project/tcl/Tcl/${TCLTK_VERSION}/tcl${TCLTK_VERSION}-src.tar.gz -P $SRC_DIR
+    wget http://iweb.dl.sourceforge.net/project/tcl/Tcl/${TCLTK_VERSION}/tk${TCLTK_VERSION}-src.tar.gz -P $SRC_DIR
+    cd $SRC_DIR
+    tar xzf tcl${TCLTK_VERSION}-src.tar.gz
+    ln -sf tcl${JPEG_VERSION} tcl
+    tar xzf tk${TCLTK_VERSION}-src.tar.gz
+    ln -sf tk${JPEG_VERSION} tk
 fi

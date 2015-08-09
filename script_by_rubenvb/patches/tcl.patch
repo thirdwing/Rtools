@@ -1,0 +1,18 @@
+--- Makefile	2015-08-09 14:21:24.495239295 -0400
++++ Makefile	2015-08-09 14:21:14.231239295 -0400
+@@ -665,13 +665,13 @@
+ install-tzdata:
+ 	@echo "Installing time zone data"
+ 	@TCL_LIBRARY="${LIBRARY_DIR}"; export TCL_LIBRARY; \
+-	./$(TCLSH) "$(ROOT_DIR)/tools/installData.tcl" \
++	tclsh8.5 "$(ROOT_DIR)/tools/installData.tcl" \
+ 	    "$(ROOT_DIR)/library/tzdata" "$(SCRIPT_INSTALL_DIR)/tzdata"
+ 
+ install-msgs:
+ 	@echo "Installing message catalogs"
+ 	@TCL_LIBRARY="${LIBRARY_DIR}"; export TCL_LIBRARY; \
+-	./$(TCLSH) "$(ROOT_DIR)/tools/installData.tcl" \
++	tclsh8.5 "$(ROOT_DIR)/tools/installData.tcl" \
+ 	    "$(ROOT_DIR)/library/msgs" "$(SCRIPT_INSTALL_DIR)/msgs"
+ 
+ install-doc: doc
