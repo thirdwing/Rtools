@@ -31,7 +31,8 @@ export SRC_DIR=$PWD/src
 
 export WINLIB64=$PWD/W64soft
 export WINLIB32=$PWD/W32soft
-export TCLTK_BUILD=$PWD/tcltck
+export TCLTK_BUILD=$PWD/tcltk
+mkdir -p $TCLTK_BUILD
 
 echo "64-bit libraries"
 
@@ -47,11 +48,8 @@ cp -rf W64soft/include/* ./local320/include
 cp -rf W64soft/lib/* ./local320/lib/x64
 rm -rf ./local320/lib/x64/*.la
 rm -rf ./local320/lib/x64/*.dll.a
-zip -r local320.zip local320
 
 echo "Build tcltk"
-##. ./scripts/tcltk.sh || exit 1
-
-##zip -r tcltk.zip tcltk
+. ./scripts/tcltk.sh || exit 1
 
 ## export PATH=$PWD/linux64mingw32/mingw32/bin:$PATH

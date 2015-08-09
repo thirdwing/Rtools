@@ -279,7 +279,7 @@ else
     wget http://iweb.dl.sourceforge.net/project/tcl/Tcl/${TCLTK_VERSION}/tk${TCLTK_VERSION}-src.tar.gz -P $SRC_DIR
     cd $SRC_DIR
     tar xzf tcl${TCLTK_VERSION}-src.tar.gz
-    ln -sf tcl${JPEG_VERSION} tcl
+    ln -sf tcl${TCLTK_VERSION} tcl
     tar xzf tk${TCLTK_VERSION}-src.tar.gz
-    ln -sf tk${JPEG_VERSION} tk
+    ln -sf tk${TCLTK_VERSION} tk
 fi

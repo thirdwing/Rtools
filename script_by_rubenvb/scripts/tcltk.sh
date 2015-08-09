@@ -10,6 +10,7 @@ else
   echo "--> Configuring"
   ./configure --host=x86_64-w64-mingw32 --enable-gcc \
               --prefix=$TCLTK_BUILD > $LOG_DIR/tcl_configure.log 2>&1 || exit 1
+  patch Makefile ../../../patches/tcl.patch
   echo "--> Configured"
 fi
 touch $LOG_DIR/tcl_configure.marker
@@ -34,7 +35,7 @@ else
 fi
 touch $LOG_DIR/tcl_install.marker
 
-cd $SRC_DIR/tk
+cd ../../tk/win
 
 if [ -f $LOG_DIR/tk_configure.marker ]
 then
@@ -67,4 +68,4 @@ else
 fi
 touch $LOG_DIR/tk_install.marker
 
-cd $SRC_DIR/..
+cd ../../..
