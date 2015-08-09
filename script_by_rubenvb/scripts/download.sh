@@ -98,7 +98,7 @@ then
     echo "--> Already downloaded expat"
 else
     echo "--> Download expat"
-    wget http://colocrossing.dl.sourceforge.net/project/expat/expat/${EXPAT_VERSION}/expat-${EXPAT_VERSION}.tar.gz -P $SRC_DIR/
+    wget http://iweb.dl.sourceforge.net/project/expat/expat/${EXPAT_VERSION}/expat-${EXPAT_VERSION}.tar.gz -P $SRC_DIR/
     cd $SRC_DIR
     tar xzf expat-${EXPAT_VERSION}.tar.gz
     ln -sf expat-${EXPAT_VERSION} expat
@@ -306,14 +306,14 @@ else
     ln -sf libssh2-${SSH2_VERSION} libssh2
 fi
 
-if [ -f $SRC_DIR/rtmpdump-${RTMP_VERSION}.tar.gz ]
+if [ -f $SRC_DIR/rtmpdump-${RTMP_VERSION}.tgz ]
 then
     echo "--> Already downloaded rtmpdump"
 else
     echo "--> Download rtmpdump"
     wget https://rtmpdump.mplayerhq.hu/download/rtmpdump-${RTMP_VERSION}.tgz -P $SRC_DIR
     cd $SRC_DIR
-    tar xzf rtmpdump-${RTMP_VERSION}.tar.gz
+    tar xzf rtmpdump-${RTMP_VERSION}.tgz
     ln -sf rtmpdump-${RTMP_VERSION} rtmpdump
 fi
 
@@ -322,7 +322,7 @@ then
     echo "--> Already downloaded curl"
 else
     echo "--> Download curl"
-    wget http://curl.haxx.se/download/curl-${CURL_VERSION}.0.tar.gz -P $SRC_DIR
+    wget http://curl.haxx.se/download/curl-${CURL_VERSION}.tar.gz -P $SRC_DIR
     cd $SRC_DIR
     tar xzf curl-${CURL_VERSION}.tar.gz
     ln -sf curl-${CURL_VERSION} curl
@@ -357,7 +357,7 @@ else
     echo "--> Download icu4c"
     wget http://download.icu-project.org/files/icu4c/53.1/icu4c-${ICU_VERSION}-src.tgz -P $SRC_DIR
     cd $SRC_DIR
-    tar xzf icu4c-${PIXMAN_VERSION}-src.tgz
+    tar xzf icu4c-${ICU_VERSION}-src.tgz
 fi
 
 
