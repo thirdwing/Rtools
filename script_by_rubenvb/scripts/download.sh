@@ -12,6 +12,7 @@ else
     cd $SRC_DIR
     tar jxf ${MINGW_W64_VERSION}.tar.bz2
     ln -sf ${MINGW_W64_VERSION} mingw-w64
+    patch mingw-w64/mingw-w64-crt/misc/mingw_getsp.S ../patches/mingw-w64-3.3.0.patch
 fi
 
 if [ -f $SRC_DIR/gcc-${GCC_VERSION}.tar.bz2 ]

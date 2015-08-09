@@ -1,0 +1,13 @@
+--- a/mingw-w64/mingw-w64-crt/misc/mingw_getsp.S	2015-08-08 22:18:56.000000000 -0700
++++ b/mingw-w64/mingw-w64-crt/misc/mingw_getsp.S	2015-08-08 22:19:49.000000000 -0700
+@@ -27,8 +27,8 @@
+ __MINGW_USYMBOL(longjmp):
+ #ifdef _WIN64
+ #ifndef __SEH__
+-  xorl %eax,%eax
+-  movl %eax, (%rcx)
++  xorl %rax,%rax
++  movl %rax, (%rcx)
+ #endif
+   leaq __MINGW_IMP_LSYMBOL(longjmp)(%rip), %rax
+   jmpq *(%rax)
