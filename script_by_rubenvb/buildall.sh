@@ -33,6 +33,12 @@ export WINLIB64=$PWD/W64soft
 export WINLIB32=$PWD/W32soft
 export TCLTK_BUILD=$PWD/tcltk
 mkdir -p $TCLTK_BUILD
+export CURL_BUILD=$PWD/curl
+mkdir -p $CURL_BUILD
+export CAIRO_BUILD=$PWD/cairo
+mkdir -p $CAIRO_BUILD
+export ICU_BUILD=$PWD/icu
+mkdir -p $ICU_BUILD
 
 echo "64-bit libraries"
 
@@ -61,5 +67,18 @@ echo "-> libssh2"
 
 echo "-> rtmp"
 . ./scripts/rtmp.sh || exit 1 
+
+echo "-> libcurl"
+. ./scripts/curl.sh || exit 1
+
+echo "Build cairo"
+echo "-> pixman"
+. ./scripts/pixman.sh || exit 1
+
+echo "-> cairo"
+. ./scripts/cairo.sh || exit 1
+
+echo "-> ICU"
+. ./scripts/icu.sh || exit 1
 
 ## export PATH=$PWD/linux64mingw32/mingw32/bin:$PATH

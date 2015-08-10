@@ -11,3 +11,8 @@ W64soft/
 W32soft/
 local320/
 tcltk/
+curl/
+cairo/
+build_icu_linux/
+build_icu_win/
+icu/
