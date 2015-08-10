@@ -59,5 +59,7 @@ echo "-> openssl"
 echo "-> libssh2"
 . ./scripts/libssh2.sh || exit 1
 
+echo "-> rtmp"
+. ./scripts/rtmp.sh || exit 1 
 
 ## export PATH=$PWD/linux64mingw32/mingw32/bin:$PATH
