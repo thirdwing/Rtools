@@ -52,7 +52,12 @@ rm -rf ./local320/lib/x64/*.dll.a
 echo "Build tcltk"
 . ./scripts/tcltk.sh || exit 1
 
-echo "Build OpenSSL"
+echo "Build libcurl"
+echo "-> openssl"
 . ./scripts/openssl.sh || exit 1
+
+echo "-> libssh2"
+. ./scripts/libssh2.sh || exit 1
+
 
 ## export PATH=$PWD/linux64mingw32/mingw32/bin:$PATH

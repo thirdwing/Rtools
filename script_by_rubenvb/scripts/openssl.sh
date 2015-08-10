@@ -8,8 +8,8 @@ then
   echo "--> Already configured"
 else
   echo "--> Configuring"
-  CROSS_COMPILE=$HOST- ./Configure mingw64 no-asm -prefix=$BUILD_DIR \
-                        > $LOG_DIR/openssl_configure.log 2>&1 || exit 1
+  CROSS_COMPILE=$HOST- ./Configure mingw64 no-asm --prefix=$BUILD_DIR \
+                 > $LOG_DIR/openssl_configure.log 2>&1 || exit 1
   echo "--> Configured"
 fi
 touch $LOG_DIR/openssl_configure.marker
