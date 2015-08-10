@@ -337,6 +337,7 @@ else
     cd $SRC_DIR
     tar xzf cairo-${CAIRO_VERSION}.tar.gz
     ln -sf cairo-${CAIRO_VERSION} cairo
+    patch cairo/src/cairo-compiler-private.h ../patches/cairo.patch
 fi
 
 if [ -f $SRC_DIR/pixman-${PIXMAN_VERSION}.tar.gz ]

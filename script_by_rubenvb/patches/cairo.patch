@@ -1,0 +1,13 @@
+--- a/src/cairo-compiler-private.h	2010-06-18 07:47:12.000000000 -0400
++++ b/src/cairo-compiler-private.h	2015-08-10 02:52:20.743239295 -0400
+@@ -209,6 +209,10 @@
+ #define hypot _hypot
+ #endif
+ 
++#if defined(__MINGW32__) && !defined(HAVE_FFS)
++# define ffs __builtin_ffs
++#endif
++
+ #ifdef _MSC_VER
+ #undef inline
+ #define inline __inline
