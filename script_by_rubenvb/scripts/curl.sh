@@ -11,6 +11,7 @@ else
   ./configure --host=$HOST -prefix=$CURL_BUILD \
               --enable-static --disable-shared \
               --without-random --enable-sspi --enable-ipv6 \
+              --with-zlib=$BUILD_DIR --with-libssh2=$BUILD_DIR \
               > $LOG_DIR/curl_configure.log 2>&1 || exit 1
   echo "--> Configured"
 fi

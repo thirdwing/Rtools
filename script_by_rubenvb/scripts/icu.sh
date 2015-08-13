@@ -63,7 +63,7 @@ else
 fi
 touch $LOG_DIR/icu_win_build.marker
 
-if [ -f $LOG_DIR/icu_linux_win.marker ]
+if [ -f $LOG_DIR/icu_win_install.marker ]
 then
   echo "--> Already installed Windows ICU"
 else
