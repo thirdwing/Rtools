@@ -284,50 +284,6 @@ else
     ln -sf tk${TCLTK_VERSION} tk
 fi
 
-if [ -f $SRC_DIR/openssl-${OPENSSL_VERSION}.tar.gz ]
-then
-    echo "--> Already downloaded openssl"
-else
-    echo "--> Download openssl"
-    wget https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz -P $SRC_DIR
-    cd $SRC_DIR
-    tar xzf openssl-${OPENSSL_VERSION}.tar.gz
-    ln -sf openssl-${OPENSSL_VERSION} openssl
-fi
-
-if [ -f $SRC_DIR/libssh2-${SSH2_VERSION}.tar.gz ]
-then
-    echo "--> Already downloaded libssh2"
-else
-    echo "--> Download libssh2"
-    wget http://www.libssh2.org/download/libssh2-${SSH2_VERSION}.tar.gz -P $SRC_DIR
-    cd $SRC_DIR
-    tar xzf libssh2-${SSH2_VERSION}.tar.gz
-    ln -sf libssh2-${SSH2_VERSION} libssh2
-fi
-
-if [ -f $SRC_DIR/rtmpdump-${RTMP_VERSION}.tgz ]
-then
-    echo "--> Already downloaded rtmpdump"
-else
-    echo "--> Download rtmpdump"
-    wget https://rtmpdump.mplayerhq.hu/download/rtmpdump-${RTMP_VERSION}.tgz -P $SRC_DIR
-    cd $SRC_DIR
-    tar xzf rtmpdump-${RTMP_VERSION}.tgz
-    ln -sf rtmpdump-${RTMP_VERSION} rtmpdump
-fi
-
-if [ -f $SRC_DIR/curl-${CURL_VERSION}.tar.gz ]
-then
-    echo "--> Already downloaded curl"
-else
-    echo "--> Download curl"
-    wget http://curl.haxx.se/download/curl-${CURL_VERSION}.tar.gz -P $SRC_DIR
-    cd $SRC_DIR
-    tar xzf curl-${CURL_VERSION}.tar.gz
-    ln -sf curl-${CURL_VERSION} curl
-fi
-
 if [ -f $SRC_DIR/cairo-${CAIRO_VERSION}.tar.gz ]
 then
     echo "--> Already downloaded cairo"
