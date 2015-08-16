@@ -146,6 +146,7 @@ else
     cd $SRC_DIR
     tar xzf bzip2-${BZIP2_VERSION}.tar.gz
     ln -sf bzip2-${BZIP2_VERSION} bzip2
+    patch bzip2/bzip2.c ../patches/bzip2.patch
 fi
 
 if [ -f $SRC_DIR/gdal-${GDAL_VERSION}.tar.gz ]

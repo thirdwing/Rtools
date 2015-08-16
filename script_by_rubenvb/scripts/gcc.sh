@@ -17,7 +17,6 @@ else
                             --disable-nls --disable-werror --enable-checking=release \
                             --with-gnu-as --with-gnu-ld \
                             $GNU_WIN32_OPTIONS \
-                            $RUBENVB_PACKAGE_OPTIONS \
                             CC="$HOST_CC" CFLAGS="$HOST_CFLAGS" CXXFLAGS="$HOST_CXXFLAGS" LDFLAGS="$HOST_LDFLAGS" \
                             BOOT_CFLAGS="$HOST_CFLAGS" BOOT_CXXFLAGS="$HOST_CXXFLAGS" BOOT_LDFLAGS="$HOST_LDFLAGS" \
                             CFLAGS_FOR_TARGET="$TARGET_CFLAGS" CXXFLAGS_FOR_TARGET="$TARGET_CXXFLAGS" LDFLAGS_FOR_TARGET="$TARGET_LDFLAGS" \
