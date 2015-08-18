@@ -1,8 +1,5 @@
-Hello!
-Error appears when building libgcc_s_sjlj-1.dll - 64bit.
-libgcc_s_sjlj-1.dll - 32bit is built successfully.
-The error apparently consists in that for 32/64 bit are used the same
-libraries - 32bit.
+
+https://ffmpeg.zeranoe.com/blog/?p=414
 
 That`s how I do it :
 1. host compiler installed in /e/mingw:
