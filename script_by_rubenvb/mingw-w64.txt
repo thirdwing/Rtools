@@ -1,0 +1,70 @@
+Hello!
+Error appears when building libgcc_s_sjlj-1.dll - 64bit.
+libgcc_s_sjlj-1.dll - 32bit is built successfully.
+The error apparently consists in that for 32/64 bit are used the same
+libraries - 32bit.
+
+That`s how I do it :
+1. host compiler installed in /e/mingw:
+>   Using built-in specs.
+>   COLLECT_GCC=e:\mingw\bin\gcc.exe
+>   COLLECT_LTO_WRAPPER=e:/mingw/bin/../libexec/gcc/i686-pc-mingw32/4.6.3/lto-wrapper.exe
+>   Target: i686-pc-mingw32
+>   Configured with: ../../mingw-src/gcc-4.6.3/configure \
+>      --host=i686-pc-mingw32 --build=i686-pc-mingw32 \
+>      --target=i686-pc-mingw32 --prefix=/mingw-dwarf-x86 \
+>      --with-arch=i686 --with-tune=generic \
+>      --enable-languages=c,c++,lto,fortran \
+>      --enable-libstdcxx-time=yes --with-host-libstdcxx=-lstdc++ \
+>      --enable-shared --enable-static --enable-libgomp \
+>      --enable-lto --enable-graphite --enable-cloog-backend=isl \
+>      --enable-checking=release --enable-fully-dynamic-string \
+>      --enable-threads=posix --disable-libstdcxx-pch \
+>      --enable-libstdcxx-debug --enable-sjlj-exceptions \
+>      --disable-debug --disable-bootstrap \
+>      --disable-multilib --disable-rpath --disable-win32-registry \
+>      --disable-nls --disable-werror --disable-symvers \
+>      --with-gmp=/mingw-libs --with-mpfr=/mingw-libs \
+>      --with-mpc=/mingw-libs --with-ppl=/mingw-libs \
+>      --with-cloog=/mingw-libs --with-libiconv-prefix=/mingw-libs
+
+2. building binutils: (successfully)
+       --target=i686-w64-mingw32
+       --enable-targets=x86_64-w64-mingw32,i686-w64-mingw32
+       --enable-multilib
+       --enable-64-bit-bfd
+       --prefix=$PREFIX
+       --with-sysroot=$PREFIX
+       --disable-nls
+       --enable-lto
+       --with-libiconv-prefix=$LIBS_DIR
+
+3. building mingw-w64-headers: (successfully)
+       --host=i686-w64-mingw32
+       --target=i686-w64-mingw32
+       --prefix=$PREFIX
+       --with-sysroot=$PREFIX
+       --enable-sdk=all
+       --enable-secure-api
+
+4. building gcc-c: (successfully)
+       --target=i686-w64-mingw32
+       --enable-targets=all
+       --enable-multilib
+       --prefix=$PREFIX
+       --with-sysroot=$PREFIX
+       --enable-languages=c,c++,lto
+
+5. set new PATH:
+       export PATH=$PREFIX/bin:$PATH
+
+6. building mingw-w64-crt: (successfully)
+       --host=i686-w64-mingw32
+       --prefix=$PREFIX
+       --with-sysroot=$PREFIX
+       --enable-lib32
+       --enable-lib64
+
+7. building gcc-all: (errors!)
+       make all
+
