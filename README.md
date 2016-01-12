@@ -1,5 +1,7 @@
 # Rtools
 
+For the latest version of Rtools, please see github.com/rwinlib/r-base
+
 ## Goal
 
 Generate a new toolchain using a modern version of the gcc compiler that is
