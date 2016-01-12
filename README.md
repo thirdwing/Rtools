@@ -1,6 +1,6 @@
 # Rtools
 
-For the latest version of Rtools, please see github.com/rwinlib/r-base
+For the latest version of Rtools, please see https://github.com/rwinlib/r-base
 
 ## Goal
 
